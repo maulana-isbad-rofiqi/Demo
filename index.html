@@ -3,12 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SecurityPro Tools - Educational Security Testing</title>
+    <title>STRESS TEST PRO - Advanced Load Testing</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --secondary: #1e40af;
-            --danger: #dc2626;
+            --primary: #dc2626;
+            --secondary: #b91c1c;
             --success: #16a34a;
             --warning: #d97706;
             --dark: #1f2937;
@@ -36,59 +35,55 @@
         
         .header {
             text-align: center;
-            padding: 40px 0;
-            background: rgba(30, 41, 59, 0.8);
+            padding: 30px 0;
+            background: rgba(220, 38, 38, 0.1);
             border-radius: 15px;
-            margin-bottom: 30px;
-            border: 1px solid #334155;
+            margin-bottom: 20px;
+            border: 2px solid #dc2626;
         }
         
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            background: linear-gradient(90deg, #60a5fa, #3b82f6);
+            background: linear-gradient(90deg, #f87171, #dc2626);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
-        .header p {
-            color: #cbd5e1;
-            font-size: 1.1rem;
-        }
-        
-        .disclaimer {
-            background: rgba(220, 38, 38, 0.1);
-            border: 1px solid var(--danger);
+        .warning-banner {
+            background: rgba(220, 38, 38, 0.2);
+            border: 2px solid var(--primary);
             border-radius: 10px;
             padding: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-align: center;
+            font-weight: bold;
         }
         
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 25px;
             margin-bottom: 40px;
         }
         
         .tool-card {
-            background: rgba(30, 41, 59, 0.8);
+            background: rgba(30, 41, 59, 0.9);
             border-radius: 15px;
             padding: 25px;
-            border: 1px solid #334155;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #dc2626;
+            transition: all 0.3s ease;
         }
         
         .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.3);
         }
         
         .tool-card h3 {
-            color: #60a5fa;
+            color: #f87171;
             margin-bottom: 15px;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
         }
         
         .input-group {
@@ -105,16 +100,11 @@
         .input-group input, .input-group select {
             width: 100%;
             padding: 12px;
-            border: 1px solid #475569;
+            border: 1px solid #dc2626;
             border-radius: 8px;
             background: #1e293b;
             color: white;
             font-size: 1rem;
-        }
-        
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--primary);
         }
         
         .btn {
@@ -129,408 +119,454 @@
             margin-bottom: 10px;
         }
         
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-primary:hover {
-            background: var(--secondary);
-        }
-        
         .btn-danger {
-            background: var(--danger);
+            background: linear-gradient(135deg, #dc2626, #b91c1c);
             color: white;
         }
         
-        .btn-success {
-            background: var(--success);
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #b91c1c, #991b1b);
+            transform: scale(1.05);
+        }
+        
+        .btn-warning {
+            background: linear-gradient(135deg, #d97706, #b45309);
             color: white;
         }
         
         .results {
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             border-radius: 10px;
             padding: 20px;
             margin-top: 20px;
-            border: 1px solid #334155;
-            max-height: 300px;
+            border: 1px solid #dc2626;
+            max-height: 400px;
             overflow-y: auto;
-        }
-        
-        .result-item {
-            padding: 10px;
-            margin-bottom: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 5px;
-            border-left: 4px solid var(--primary);
+            font-family: 'Courier New', monospace;
         }
         
         .progress-bar {
             width: 100%;
-            height: 8px;
+            height: 12px;
             background: #374151;
-            border-radius: 4px;
-            margin: 10px 0;
+            border-radius: 6px;
+            margin: 15px 0;
             overflow: hidden;
+            border: 1px solid #dc2626;
         }
         
         .progress {
             height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--success));
+            background: linear-gradient(90deg, #dc2626, #ea580c);
             transition: width 0.3s ease;
         }
         
-        .status-indicator {
-            display: inline-block;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            margin-right: 8px;
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
         }
         
-        .status-online { background: var(--success); }
-        .status-offline { background: var(--danger); }
-        .status-warning { background: var(--warning); }
+        .stat-card {
+            background: rgba(220, 38, 38, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #dc2626;
+        }
         
-        .logs {
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            color: #94a3b8;
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f87171;
         }
         
         @keyframes pulse {
             0% { opacity: 1; }
-            50% { opacity: 0.5; }
+            50% { opacity: 0.7; }
             100% { opacity: 1; }
         }
         
         .pulse {
-            animation: pulse 2s infinite;
+            animation: pulse 1s infinite;
+        }
+        
+        .concurrent-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin: 15px 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🛡️ SecurityPro Tools</h1>
-            <p>Educational Security Testing Platform - Untuk Testing Website Milik Sendiri</p>
+            <h1>💥 STRESS TEST PRO</h1>
+            <p>Advanced Load Testing - HANYA untuk Server Milik Sendiri</p>
         </div>
         
-        <div class="disclaimer">
-            <strong>⚠ PERINGATAN:</strong> Tools ini hanya untuk testing website milik sendiri atau yang telah mendapatkan izin. 
-            Penggunaan untuk menyerang sistem lain tanpa izin adalah ilegal dan melanggar hukum.
+        <div class="warning-banner">
+            ⚠️ PERINGATAN: Tools ini sangat AGGRESSIVE! Hanya gunakan untuk server milik sendiri.
+            Dapat menyebabkan downtime jika server tidak cukup powerful!
         </div>
 
         <div class="tools-grid">
-            <!-- Load Testing Tool -->
+            <!-- Aggressive Load Testing -->
             <div class="tool-card">
-                <h3>⚡ Load Testing</h3>
-                <p>Test performa website dengan simulasi traffic yang aman</p>
+                <h3>💥 STRESS LOAD TEST</h3>
+                <p>High-intensity load testing dengan concurrent requests</p>
                 
                 <div class="input-group">
-                    <label>URL Target (harus milik Anda):</label>
-                    <input type="url" id="loadTestUrl" placeholder="https://website-anda.com" value="">
+                    <label>Target URL:</label>
+                    <input type="url" id="stressUrl" placeholder="http://your-server.com" value="">
                 </div>
                 
                 <div class="input-group">
-                    <label>Jumlah Request (max 50):</label>
-                    <input type="number" id="requestCount" value="10" min="1" max="50">
+                    <label>Total Requests (max 5000):</label>
+                    <input type="number" id="stressRequests" value="1000" min="100" max="5000">
                 </div>
                 
-                <div class="input-group">
-                    <label>Delay antara request (ms):</label>
-                    <input type="number" id="requestDelay" value="100" min="50" max="1000">
+                <div class="concurrent-controls">
+                    <div class="input-group" style="flex: 1;">
+                        <label>Concurrent Workers:</label>
+                        <input type="number" id="concurrentWorkers" value="10" min="1" max="50">
+                    </div>
+                    
+                    <div class="input-group" style="flex: 1;">
+                        <label>Delay (ms):</label>
+                        <input type="number" id="stressDelay" value="10" min="0" max="1000">
+                    </div>
                 </div>
                 
-                <button class="btn btn-primary" onclick="startLoadTest()">Start Load Test</button>
-                <button class="btn btn-danger" onclick="stopLoadTest()">Stop</button>
+                <button class="btn btn-danger" onclick="startStressTest()">🚀 START STRESS TEST</button>
+                <button class="btn btn-warning" onclick="stopAllTests()">🛑 EMERGENCY STOP</button>
                 
                 <div class="progress-bar">
-                    <div class="progress" id="loadProgress" style="width: 0%"></div>
+                    <div class="progress" id="stressProgress" style="width: 0%"></div>
                 </div>
                 
-                <div class="results" id="loadResults">
-                    <div class="result-item">Status: Menunggu test...</div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="requestsSent">0</div>
+                        <div>Requests Sent</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="successRate">0%</div>
+                        <div>Success Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgResponse">0ms</div>
+                        <div>Avg Response</div>
+                    </div>
+                </div>
+                
+                <div class="results" id="stressResults">
+                    <div>💡 Ready for stress testing...</div>
                 </div>
             </div>
 
-            <!-- Port Scanner -->
+            <!-- Advanced Port Hammer -->
             <div class="tool-card">
-                <h3>🔍 Port Scanner</h3>
-                <p>Scan port terbuka pada server Anda</p>
+                <h3>🔨 PORT HAMMER TEST</h3>
+                <p>Aggressive port connection testing</p>
                 
                 <div class="input-group">
-                    <label>Domain/IP Target:</label>
-                    <input type="text" id="scanTarget" placeholder="localhost atau IP Anda" value="localhost">
+                    <label>Target IP/Domain:</label>
+                    <input type="text" id="hammerTarget" placeholder="your-server.com" value="">
                 </div>
                 
                 <div class="input-group">
                     <label>Port Range:</label>
-                    <select id="portRange">
-                        <option value="common">Common Ports (20-443)</option>
-                        <option value="web">Web Ports (80,443,8080,8443)</option>
+                    <select id="hammerPorts">
+                        <option value="common">Common Ports (20-1000)</option>
+                        <option value="all">All Common Ports (1-10000)</option>
                         <option value="custom">Custom Range</option>
                     </select>
                 </div>
                 
-                <button class="btn btn-primary" onclick="startPortScan()">Start Port Scan</button>
-                
-                <div class="results" id="portResults">
-                    <div class="result-item">
-                        <span class="status-indicator status-online"></span>Port 80: HTTP ✓
-                    </div>
-                    <div class="result-item">
-                        <span class="status-indicator status-online"></span>Port 443: HTTPS ✓
-                    </div>
-                </div>
-            </div>
-
-            <!-- Security Headers Check -->
-            <div class="tool-card">
-                <h3>🔒 Security Headers Check</h3>
-                <p>Periksa keamanan HTTP headers website</p>
-                
                 <div class="input-group">
-                    <label>URL untuk di-check:</label>
-                    <input type="url" id="securityUrl" placeholder="https://website-anda.com">
+                    <label>Connection Timeout (ms):</label>
+                    <input type="number" id="hammerTimeout" value="1000" min="100" max="10000">
                 </div>
                 
-                <button class="btn btn-primary" onclick="checkSecurityHeaders()">Check Headers</button>
+                <button class="btn btn-danger" onclick="startPortHammer()">🔨 HAMMER PORTS</button>
                 
-                <div class="results" id="securityResults">
-                    <div class="result-item">Hasil check akan muncul di sini...</div>
-                </div>
-            </div>
-
-            <!-- Network Monitor -->
-            <div class="tool-card">
-                <h3>📊 Network Monitor</h3>
-                <p>Monitor aktivitas jaringan secara real-time</p>
-                
-                <div class="input-group">
-                    <label>Monitoring Duration (detik):</label>
-                    <input type="number" id="monitorDuration" value="30" min="10" max="300">
-                </div>
-                
-                <button class="btn btn-success" onclick="startNetworkMonitor()">Start Monitor</button>
-                <button class="btn btn-danger" onclick="stopNetworkMonitor()">Stop</button>
-                
-                <div class="results logs" id="networkLogs">
-                    <div>🟢 Network Monitor Ready</div>
-                    <div>📊 Monitoring traffic patterns...</div>
+                <div class="results" id="hammerResults">
+                    <div>🔧 Port hammer ready...</div>
                 </div>
             </div>
         </div>
 
-        <!-- Real-time Dashboard -->
+        <!-- Real-time Monitoring -->
         <div class="tool-card">
-            <h3>📈 Security Dashboard</h3>
-            <div class="dashboard-stats">
-                <div class="result-item">
-                    <span class="status-indicator status-online pulse"></span>
-                    <strong>System Status:</strong> All Systems Operational
+            <h3>📊 REAL-TIME STRESS MONITOR</h3>
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-value pulse" id="currentRPS">0</div>
+                    <div>Requests/Sec</div>
                 </div>
-                <div class="result-item">
-                    <span class="status-indicator status-warning"></span>
-                    <strong>Security Level:</strong> Medium - Educational Mode
+                <div class="stat-card">
+                    <div class="stat-value" id="totalTime">0s</div>
+                    <div>Test Duration</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="errorCount">0</div>
+                    <div>Errors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="workersActive">0</div>
+                    <div>Active Workers</div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let loadTestInterval;
-        let networkMonitorInterval;
-        let currentProgress = 0;
+        let stressTestInterval;
+        let portHammerInterval;
+        let activeWorkers = 0;
+        let testStartTime = 0;
+        
+        // Statistics
+        let stats = {
+            requestsSent: 0,
+            requestsSuccess: 0,
+            requestsFailed: 0,
+            totalResponseTime: 0,
+            lastUpdate: Date.now(),
+            rps: 0
+        };
 
-        // Load Testing Function
-        function startLoadTest() {
-            const url = document.getElementById('loadTestUrl').value;
-            const count = parseInt(document.getElementById('requestCount').value);
-            const delay = parseInt(document.getElementById('requestDelay').value);
+        // Aggressive Stress Testing
+        function startStressTest() {
+            const url = document.getElementById('stressUrl').value;
+            const totalRequests = parseInt(document.getElementById('stressRequests').value);
+            const concurrent = parseInt(document.getElementById('concurrentWorkers').value);
+            const delay = parseInt(document.getElementById('stressDelay').value);
             
-            if (!url || !url.startsWith('http')) {
-                alert('Masukkan URL yang valid (harus milik Anda sendiri)');
+            if (!url) {
+                alert('Masukkan target URL!');
                 return;
             }
             
-            if (count > 50) {
-                alert('Maksimal 50 request untuk testing edukasi');
+            if (totalRequests > 5000) {
+                alert('Maksimal 5000 requests untuk safety!');
                 return;
             }
             
-            const resultsDiv = document.getElementById('loadResults');
-            resultsDiv.innerHTML = '<div class="result-item">🟡 Starting load test...</div>';
-            currentProgress = 0;
-            updateProgress(0);
+            // Auto-add http:// if missing
+            let testUrl = url;
+            if (!testUrl.startsWith('http')) {
+                testUrl = 'http://' + testUrl;
+                document.getElementById('stressUrl').value = testUrl;
+            }
+            
+            // Reset stats
+            resetStats();
+            testStartTime = Date.now();
+            
+            const resultsDiv = document.getElementById('stressResults');
+            resultsDiv.innerHTML = `<div>🚀 Starting AGGRESSIVE stress test:</div>
+                                  <div>📊 ${totalRequests} total requests</div>
+                                  <div>👥 ${concurrent} concurrent workers</div>
+                                  <div>⚡ ${delay}ms delay</div>`;
             
             let completed = 0;
-            loadTestInterval = setInterval(() => {
-                if (completed < count) {
-                    simulateRequest(url, completed + 1);
-                    completed++;
-                    currentProgress = (completed / count) * 100;
-                    updateProgress(currentProgress);
-                } else {
-                    clearInterval(loadTestInterval);
-                    resultsDiv.innerHTML += `<div class="result-item">🟢 Load test completed! ${count} requests sent.</div>`;
+            activeWorkers = concurrent;
+            
+            // Start multiple concurrent workers
+            for (let i = 0; i < concurrent; i++) {
+                startWorker(testUrl, totalRequests, delay, i);
+            }
+            
+            // Update progress in real-time
+            stressTestInterval = setInterval(() => {
+                updateStats();
+                const progress = (stats.requestsSent / totalRequests) * 100;
+                document.getElementById('stressProgress').style.width = Math.min(progress, 100) + '%';
+                
+                if (stats.requestsSent >= totalRequests) {
+                    stopStressTest();
+                    const totalTime = (Date.now() - testStartTime) / 1000;
+                    resultsDiv.innerHTML += `
+                        <div>🎯 STRESS TEST COMPLETED!</div>
+                        <div>⏱️ Total Time: ${totalTime.toFixed(2)}s</div>
+                        <div>📈 ${(totalRequests/totalTime).toFixed(2)} requests/second</div>
+                        <div>✅ ${stats.requestsSuccess} successful</div>
+                        <div>❌ ${stats.requestsFailed} failed</div>
+                    `;
                 }
-            }, delay);
+            }, 100);
         }
         
-        function stopLoadTest() {
-            clearInterval(loadTestInterval);
-            document.getElementById('loadResults').innerHTML += '<div class="result-item">🔴 Load test stopped by user</div>';
-            updateProgress(0);
+        function startWorker(url, totalRequests, delay, workerId) {
+            let workerCompleted = 0;
+            const requestsPerWorker = Math.ceil(totalRequests / activeWorkers);
+            
+            function workerLoop() {
+                if (stats.requestsSent < totalRequests && workerCompleted < requestsPerWorker) {
+                    sendAggressiveRequest(url, workerId);
+                    workerCompleted++;
+                    setTimeout(workerLoop, delay);
+                }
+            }
+            
+            workerLoop();
         }
         
-        function simulateRequest(url, requestNum) {
-            const resultsDiv = document.getElementById('loadResults');
+        function sendAggressiveRequest(url, workerId) {
+            const requestId = ++stats.requestsSent;
             const startTime = Date.now();
             
-            // Simulasi request dengan timeout random
-            const latency = Math.random() * 100 + 50;
-            const success = Math.random() > 0.1; // 90% success rate
+            // Simulate actual HTTP request with more realistic failure rates
+            const willFail = Math.random() < 0.1; // 10% failure rate
+            const latency = Math.random() * 2000 + 100; // 100ms - 2000ms
             
             setTimeout(() => {
-                const endTime = Date.now();
-                const duration = endTime - startTime;
+                const responseTime = Date.now() - startTime;
+                stats.totalResponseTime += responseTime;
                 
-                if (success) {
-                    resultsDiv.innerHTML += `<div class="result-item">✅ Request ${requestNum}: ${duration}ms</div>`;
+                if (willFail) {
+                    stats.requestsFailed++;
                 } else {
-                    resultsDiv.innerHTML += `<div class="result-item">❌ Request ${requestNum}: Failed (${duration}ms)</div>`;
+                    stats.requestsSuccess++;
                 }
                 
-                // Keep only last 10 results
-                const items = resultsDiv.getElementsByClassName('result-item');
-                if (items.length > 10) {
-                    items[0].remove();
+                // Update UI in batches for performance
+                if (requestId % 50 === 0) {
+                    const resultsDiv = document.getElementById('stressResults');
+                    if (resultsDiv.children.length > 20) {
+                        resultsDiv.removeChild(resultsDiv.firstChild);
+                    }
+                    
+                    const status = willFail ? '❌' : '✅';
+                    resultsDiv.innerHTML += `<div>${status} Worker ${workerId}: Request ${requestId} - ${responseTime}ms</div>`;
+                    resultsDiv.scrollTop = resultsDiv.scrollHeight;
                 }
             }, latency);
         }
         
-        function updateProgress(percent) {
-            document.getElementById('loadProgress').style.width = percent + '%';
-        }
-        
-        // Port Scanner Function
-        function startPortScan() {
-            const target = document.getElementById('scanTarget').value;
-            const range = document.getElementById('portRange').value;
+        function startPortHammer() {
+            const target = document.getElementById('hammerTarget').value;
+            const portRange = document.getElementById('hammerPorts').value;
+            const timeout = parseInt(document.getElementById('hammerTimeout').value);
             
-            const resultsDiv = document.getElementById('portResults');
-            resultsDiv.innerHTML = '<div class="result-item">🟡 Starting port scan...</div>';
-            
-            // Simulasi port scanning
-            setTimeout(() => {
-                resultsDiv.innerHTML = '';
-                const commonPorts = [
-                    {port: 21, service: 'FTP', status: Math.random() > 0.7},
-                    {port: 22, service: 'SSH', status: Math.random() > 0.5},
-                    {port: 80, service: 'HTTP', status: true},
-                    {port: 443, service: 'HTTPS', status: true},
-                    {port: 3306, service: 'MySQL', status: Math.random() > 0.8},
-                    {port: 5432, service: 'PostgreSQL', status: Math.random() > 0.8}
-                ];
-                
-                commonPorts.forEach(portInfo => {
-                    const statusClass = portInfo.status ? 'status-online' : 'status-offline';
-                    const statusIcon = portInfo.status ? '✓' : '✗';
-                    resultsDiv.innerHTML += `
-                        <div class="result-item">
-                            <span class="status-indicator ${statusClass}"></span>
-                            Port ${portInfo.port}: ${portInfo.service} ${statusIcon}
-                        </div>
-                    `;
-                });
-                
-                resultsDiv.innerHTML += '<div class="result-item">🟢 Port scan completed!</div>';
-            }, 2000);
-        }
-        
-        // Security Headers Check
-        function checkSecurityHeaders() {
-            const url = document.getElementById('securityUrl').value;
-            const resultsDiv = document.getElementById('securityResults');
-            
-            if (!url) {
-                alert('Masukkan URL terlebih dahulu');
+            if (!target) {
+                alert('Masukkan target!');
                 return;
             }
             
-            resultsDiv.innerHTML = '<div class="result-item">🟡 Checking security headers...</div>';
+            const resultsDiv = document.getElementById('hammerResults');
+            resultsDiv.innerHTML = `<div>🔨 Starting PORT HAMMER on ${target}...</div>`;
             
-            // Simulasi check security headers
-            setTimeout(() => {
-                const securityHeaders = [
-                    {header: 'Content-Security-Policy', status: Math.random() > 0.3, importance: 'high'},
-                    {header: 'X-Frame-Options', status: Math.random() > 0.4, importance: 'medium'},
-                    {header: 'X-Content-Type-Options', status: Math.random() > 0.5, importance: 'medium'},
-                    {header: 'Strict-Transport-Security', status: url.startsWith('https'), importance: 'high'},
-                    {header: 'X-XSS-Protection', status: Math.random() > 0.6, importance: 'medium'}
-                ];
-                
-                resultsDiv.innerHTML = '';
-                securityHeaders.forEach(header => {
-                    const statusIcon = header.status ? '✅' : '❌';
-                    const importanceColor = header.importance === 'high' ? '#ef4444' : '#f59e0b';
-                    resultsDiv.innerHTML += `
-                        <div class="result-item">
-                            ${statusIcon} <strong>${header.header}</strong> 
-                            <span style="color: ${importanceColor}">(${header.importance})</span>
-                        </div>
-                    `;
-                });
-            }, 1500);
-        }
-        
-        // Network Monitor
-        function startNetworkMonitor() {
-            const duration = parseInt(document.getElementById('monitorDuration').value) * 1000;
-            const logsDiv = document.getElementById('networkLogs');
+            let portsToScan = [];
+            if (portRange === 'common') portsToScan = getCommonPorts(1000);
+            else if (portRange === 'all') portsToScan = getCommonPorts(10000);
             
-            logsDiv.innerHTML = '<div>🟢 Starting network monitoring...</div>';
+            let currentPort = 0;
             
-            let monitorCount = 0;
-            networkMonitorInterval = setInterval(() => {
-                monitorCount++;
-                const events = [
-                    '📡 Monitoring network traffic patterns...',
-                    '🔒 Analyzing packet sizes...',
-                    '📊 Tracking connection attempts...',
-                    '🛡️ Checking for unusual activity...',
-                    '🌐 Monitoring bandwidth usage...'
-                ];
-                
-                const randomEvent = events[Math.floor(Math.random() * events.length)];
-                logsDiv.innerHTML += `<div>${randomEvent} [${new Date().toLocaleTimeString()}]</div>`;
-                
-                // Keep only last 8 entries
-                const logEntries = logsDiv.getElementsByTagName('div');
-                if (logEntries.length > 8) {
-                    logEntries[0].remove();
+            portHammerInterval = setInterval(() => {
+                if (currentPort < portsToScan.length) {
+                    const port = portsToScan[currentPort];
+                    simulatePortConnection(target, port, timeout);
+                    currentPort++;
+                    
+                    if (currentPort % 100 === 0) {
+                        resultsDiv.innerHTML += `<div>🔍 Scanned ${currentPort} ports...</div>`;
+                    }
+                } else {
+                    clearInterval(portHammerInterval);
+                    resultsDiv.innerHTML += `<div>🎯 Port hammer completed!</div>`;
                 }
-                
-                logsDiv.scrollTop = logsDiv.scrollHeight;
-            }, 2000);
+            }, 10); // Very aggressive - 10ms between port checks
+        }
+        
+        function getCommonPorts(maxPort) {
+            const ports = [];
+            // Common service ports
+            const common = [21, 22, 23, 25, 53, 80, 110, 443, 993, 995, 8080, 8443];
             
-            // Auto stop after duration
+            // Add common ports first
+            ports.push(...common.filter(p => p <= maxPort));
+            
+            // Add range of ports
+            for (let i = 1; i <= maxPort; i++) {
+                if (!ports.includes(i)) {
+                    ports.push(i);
+                }
+            }
+            
+            return ports;
+        }
+        
+        function simulatePortConnection(target, port, timeout) {
+            const startTime = Date.now();
+            const willSucceed = Math.random() < 0.05; // 5% success rate for demo
+            
             setTimeout(() => {
-                stopNetworkMonitor();
-                logsDiv.innerHTML += '<div>🟢 Monitoring session completed</div>';
-            }, duration);
+                if (willSucceed) {
+                    const resultsDiv = document.getElementById('hammerResults');
+                    if (resultsDiv.children.length > 15) {
+                        resultsDiv.removeChild(resultsDiv.firstChild);
+                    }
+                    resultsDiv.innerHTML += `<div>✅ PORT ${port} OPEN on ${target}</div>`;
+                    resultsDiv.scrollTop = resultsDiv.scrollHeight;
+                }
+            }, Math.random() * timeout);
         }
         
-        function stopNetworkMonitor() {
-            clearInterval(networkMonitorInterval);
-            document.getElementById('networkLogs').innerHTML += '<div>🔴 Monitoring stopped</div>';
+        function updateStats() {
+            const now = Date.now();
+            const timeDiff = (now - stats.lastUpdate) / 1000;
+            
+            if (timeDiff > 0) {
+                stats.rps = Math.round((stats.requestsSent - stats.rps) / timeDiff);
+            }
+            
+            stats.lastUpdate = now;
+            
+            // Update UI
+            document.getElementById('requestsSent').textContent = stats.requestsSent;
+            document.getElementById('successRate').textContent = 
+                stats.requestsSent > 0 ? 
+                Math.round((stats.requestsSuccess / stats.requestsSent) * 100) + '%' : '0%';
+            document.getElementById('avgResponse').textContent = 
+                stats.requestsSuccess > 0 ? 
+                Math.round(stats.totalResponseTime / stats.requestsSuccess) + 'ms' : '0ms';
+            document.getElementById('currentRPS').textContent = stats.rps;
+            document.getElementById('totalTime').textContent = 
+                Math.round((Date.now() - testStartTime) / 1000) + 's';
+            document.getElementById('errorCount').textContent = stats.requestsFailed;
+            document.getElementById('workersActive').textContent = activeWorkers;
         }
         
-        // Initialize with some demo data
+        function resetStats() {
+            stats = {
+                requestsSent: 0,
+                requestsSuccess: 0,
+                requestsFailed: 0,
+                totalResponseTime: 0,
+                lastUpdate: Date.now(),
+                rps: 0
+            };
+        }
+        
+        function stopStressTest() {
+            clearInterval(stressTestInterval);
+            activeWorkers = 0;
+        }
+        
+        function stopAllTests() {
+            stopStressTest();
+            clearInterval(portHammerInterval);
+            document.getElementById('stressResults').innerHTML += '<div>🛑 ALL TESTS STOPPED</div>';
+        }
+        
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('loadTestUrl').value = window.location.origin || 'https://example.com';
+            setInterval(updateStats, 1000);
         });
     </script>
 </body>
