@@ -16,63 +16,87 @@
         .btn-demo { background: #00d4aa; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 1em; width: 100%; }
         .btn-demo:hover { background: #00b894; }
         footer { background: #333; padding: 10px; font-size: 0.8em; }
-        @media (max-width: 600px) { h1 { font-size: 1.2em; } .game-grid { grid-template-columns: 1fr; } }
+        /* Modal Styles */
+        .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); }
+        .modal-content { background-color: #fefefe; margin: 5% auto; padding: 20px; border: 1px solid #888; width: 90%; max-width: 800px; border-radius: 10px; }
+        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close:hover { color: black; }
+        iframe { width: 100%; height: 500px; border: none; } /* Adjust height for HP */
+        @media (max-width: 600px) { h1 { font-size: 1.2em; } .game-grid { grid-template-columns: 1fr; } iframe { height: 300px; } }
     </style>
 </head>
 <body>
     <header>
         <h1>Demo Gacor x10000 Asli Pragmatic Play Demo Plus Akun Demo PG Soft Gratis Banjir Scatter</h1>
-        <p>Main Demo Gratis Tanpa Deposit! Maxwin Mudah Setiap Hari</p>
+        <p>Main Demo Gratis Tanpa Deposit! Maxwin Mudah Setiap Hari, Banjir Scatter x10000 Gacor Asli</p>
     </header>
     
     <div class="container">
         <h2>Demo Pragmatic Play Gacor</h2>
         <div class="game-grid">
             <div class="game-card">
-                <img src="https://source.unsplash.com/150x100/?slot-machine" alt="Sweet Bonanza">
+                <img src="https://source.unsplash.com/150x100/?sweet-bonanza,slot" alt="Sweet Bonanza">
                 <h3>Sweet Bonanza x10000</h3>
-                <button class="btn-demo" onclick="playDemo('Sweet Bonanza')">Main Demo Gratis</button>
+                <button class="btn-demo" onclick="openModal('https://slot.day/pragmatic-play/sweet-bonanza/?playfree=1')">Main Demo Gratis</button>
             </div>
             <div class="game-card">
-                <img src="https://source.unsplash.com/150x100/?gates-of-olympus" alt="Gates of Olympus">
+                <img src="https://source.unsplash.com/150x100/?gates-of-olympus,slot" alt="Gates of Olympus">
                 <h3>Gates of Olympus</h3>
-                <button class="btn-demo" onclick="playDemo('Gates of Olympus')">Main Demo Gratis</button>
+                <button class="btn-demo" onclick="openModal('https://slot.day/pragmatic-play/gates-of-olympus/?playfree=1')">Main Demo Gratis</button>
             </div>
             <div class="game-card">
-                <img src="https://source.unsplash.com/150x100/?fruit-party" alt="Fruit Party">
+                <img src="https://source.unsplash.com/150x100/?fruit-party,slot" alt="Fruit Party">
                 <h3>Fruit Party Banjir Scatter</h3>
-                <button class="btn-demo" onclick="playDemo('Fruit Party')">Main Demo Gratis</button>
+                <button class="btn-demo" onclick="openModal('https://slot.day/pragmatic-play/fruit-party/?playfree=1')">Main Demo Gratis</button>
             </div>
         </div>
 
         <h2>Akun Demo PG Soft Gratis</h2>
         <div class="game-grid">
             <div class="game-card">
-                <img src="https://source.unsplash.com/150x100/?mahjong" alt="Mahjong Ways">
+                <img src="https://source.unsplash.com/150x100/?mahjong,slot" alt="Mahjong Ways">
                 <h3>Mahjong Ways 2</h3>
-                <button class="btn-demo" onclick="playDemo('Mahjong Ways 2')">Main Demo Gratis</button>
+                <button class="btn-demo" onclick="openModal('https://www.demoslotsfun.com/free-slots/pg-soft/mahjong-ways-2/')">Main Demo Gratis</button>
             </div>
             <div class="game-card">
-                <img src="https://source.unsplash.com/150x100/?fortune-tiger" alt="Fortune Tiger">
+                <img src="https://source.unsplash.com/150x100/?tiger,slot" alt="Fortune Tiger">
                 <h3>Fortune Tiger x1000</h3>
-                <button class="btn-demo" onclick="playDemo('Fortune Tiger')">Main Demo Gratis</button>
+                <button class="btn-demo" onclick="openModal('https://slot.day/pg-soft/fortune-tiger/?playfree=1')">Main Demo Gratis</button>
             </div>
             <div class="game-card">
-                <img src="https://source.unsplash.com/150x100/?ganesha-gold" alt="Ganesha Gold">
+                <img src="https://source.unsplash.com/150x100/?ganesha,slot" alt="Ganesha Gold">
                 <h3>Ganesha Gold</h3>
-                <button class="btn-demo" onclick="playDemo('Ganesha Gold')">Main Demo Gratis</button>
+                <button class="btn-demo" onclick="openModal('https://www.demoslotsfun.com/free-slots/pg-soft/ganesha-gold/')">Main Demo Gratis</button>
             </div>
         </div>
     </div>
 
     <footer>
-        <p>Demo Only - Tidak untuk Judi Asli. Nikmati Sensasi Maxwin Virtual!</p>
+        <p>Demo Only - Tidak untuk Judi Asli. Nikmati Sensasi Maxwin Virtual! Banjir Scatter Gacor x10000</p>
     </footer>
 
+    <!-- Modal -->
+    <div id="demoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <iframe id="demoIframe" src=""></iframe>
+        </div>
+    </div>
+
     <script>
-        function playDemo(game) {
-            alert('Demo ' + game + ' dimulai! Ini hanya simulasi - kredit unlimited x10000 gacor! 😎');
-            // Bisa tambah lebih lanjut, misal redirect ke embed iframe kalau ada link demo resmi.
+        function openModal(url) {
+            document.getElementById('demoIframe').src = url;
+            document.getElementById('demoModal').style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById('demoModal').style.display = "none";
+            document.getElementById('demoIframe').src = ""; // Reset iframe
+        }
+        // Close modal if click outside
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('demoModal')) {
+                closeModal();
+            }
         }
     </script>
 </body>
